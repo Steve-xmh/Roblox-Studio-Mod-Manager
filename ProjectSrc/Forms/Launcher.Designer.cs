@@ -40,6 +40,9 @@
             this.targetVersionLabel = new System.Windows.Forms.Label();
             this.title = new System.Windows.Forms.Label();
             this.targetVersion = new System.Windows.Forms.ComboBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.quietStartWhenHavingArgs = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,11 +52,11 @@
             this.launchStudio.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.launchStudio.Cursor = System.Windows.Forms.Cursors.Default;
             this.launchStudio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.launchStudio.Location = new System.Drawing.Point(23, 103);
+            this.launchStudio.Location = new System.Drawing.Point(23, 95);
             this.launchStudio.Name = "launchStudio";
-            this.launchStudio.Size = new System.Drawing.Size(142, 23);
+            this.launchStudio.Size = new System.Drawing.Size(142, 21);
             this.launchStudio.TabIndex = 6;
-            this.launchStudio.Text = "Launch Studio";
+            this.launchStudio.Text = "启动 Studio";
             this.launchStudio.UseVisualStyleBackColor = true;
             this.launchStudio.Click += new System.EventHandler(this.launchStudio_Click);
             // 
@@ -61,11 +64,11 @@
             // 
             this.manageMods.AccessibleName = "Open Mod Folder";
             this.manageMods.Cursor = System.Windows.Forms.Cursors.Default;
-            this.manageMods.Location = new System.Drawing.Point(23, 132);
+            this.manageMods.Location = new System.Drawing.Point(23, 122);
             this.manageMods.Name = "manageMods";
-            this.manageMods.Size = new System.Drawing.Size(142, 23);
+            this.manageMods.Size = new System.Drawing.Size(142, 21);
             this.manageMods.TabIndex = 9;
-            this.manageMods.Text = "Open Mod Folder";
+            this.manageMods.Text = "打开模组文件夹";
             this.manageMods.UseVisualStyleBackColor = true;
             this.manageMods.Click += new System.EventHandler(this.manageMods_Click);
             // 
@@ -79,9 +82,9 @@
             "sitetest1.robloxlabs",
             "sitetest2.robloxlabs",
             "sitetest3.robloxlabs"});
-            this.branchSelect.Location = new System.Drawing.Point(181, 113);
+            this.branchSelect.Location = new System.Drawing.Point(181, 104);
             this.branchSelect.Name = "branchSelect";
-            this.branchSelect.Size = new System.Drawing.Size(152, 21);
+            this.branchSelect.Size = new System.Drawing.Size(152, 20);
             this.branchSelect.TabIndex = 10;
             this.branchSelect.SelectedIndexChanged += new System.EventHandler(this.branchSelect_SelectedIndexChanged);
             // 
@@ -92,66 +95,66 @@
             this.branchLabel.CausesValidation = false;
             this.branchLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.branchLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.branchLabel.Location = new System.Drawing.Point(178, 97);
+            this.branchLabel.Location = new System.Drawing.Point(178, 90);
             this.branchLabel.Name = "branchLabel";
-            this.branchLabel.Size = new System.Drawing.Size(80, 13);
+            this.branchLabel.Size = new System.Drawing.Size(79, 13);
             this.branchLabel.TabIndex = 11;
-            this.branchLabel.Text = "Studio Branch: ";
+            this.branchLabel.Text = "Studio 分支： ";
             // 
             // forceRebuild
             // 
-            this.forceRebuild.AccessibleName = "Force Client Rebuild";
+            this.forceRebuild.AccessibleName = "强制进行重新安装";
             this.forceRebuild.AutoSize = true;
-            this.forceRebuild.Location = new System.Drawing.Point(181, 181);
+            this.forceRebuild.Location = new System.Drawing.Point(181, 167);
             this.forceRebuild.Margin = new System.Windows.Forms.Padding(2);
             this.forceRebuild.Name = "forceRebuild";
-            this.forceRebuild.Size = new System.Drawing.Size(119, 17);
+            this.forceRebuild.Size = new System.Drawing.Size(120, 16);
             this.forceRebuild.TabIndex = 12;
-            this.forceRebuild.Text = "Force Reinstallation";
+            this.forceRebuild.Text = "强制进行重新安装";
             this.forceRebuild.UseVisualStyleBackColor = true;
             // 
             // openFlagEditor
             // 
             this.openFlagEditor.AccessibleName = "Open Flag Editor";
-            this.openFlagEditor.Location = new System.Drawing.Point(23, 161);
+            this.openFlagEditor.Location = new System.Drawing.Point(23, 149);
             this.openFlagEditor.Name = "openFlagEditor";
-            this.openFlagEditor.Size = new System.Drawing.Size(142, 23);
+            this.openFlagEditor.Size = new System.Drawing.Size(142, 21);
             this.openFlagEditor.TabIndex = 15;
-            this.openFlagEditor.Text = "Edit Fast Flags";
+            this.openFlagEditor.Text = "编辑快速参数";
             this.openFlagEditor.UseVisualStyleBackColor = true;
             this.openFlagEditor.Click += new System.EventHandler(this.editFVariables_Click);
             // 
             // editExplorerIcons
             // 
             this.editExplorerIcons.AccessibleName = "Open Flag Editor";
-            this.editExplorerIcons.Location = new System.Drawing.Point(23, 190);
+            this.editExplorerIcons.Location = new System.Drawing.Point(23, 175);
             this.editExplorerIcons.Name = "editExplorerIcons";
-            this.editExplorerIcons.Size = new System.Drawing.Size(142, 23);
+            this.editExplorerIcons.Size = new System.Drawing.Size(142, 21);
             this.editExplorerIcons.TabIndex = 16;
-            this.editExplorerIcons.Text = "Edit Class Icons";
+            this.editExplorerIcons.Text = "编辑对象图标";
             this.editExplorerIcons.UseVisualStyleBackColor = true;
             this.editExplorerIcons.Click += new System.EventHandler(this.editExplorerIcons_Click);
             // 
             // logo
             // 
             this.logo.Image = global::RobloxStudioModManager.Properties.Resources.Logo;
-            this.logo.Location = new System.Drawing.Point(23, 12);
+            this.logo.Location = new System.Drawing.Point(40, 12);
             this.logo.Name = "logo";
-            this.logo.Size = new System.Drawing.Size(102, 76);
+            this.logo.Size = new System.Drawing.Size(70, 70);
             this.logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.logo.TabIndex = 19;
             this.logo.TabStop = false;
             // 
             // openStudioDirectory
             // 
-            this.openStudioDirectory.AccessibleName = "Just Open Studio Path";
+            this.openStudioDirectory.AccessibleName = "只打开 Studio 文件夹";
             this.openStudioDirectory.AutoSize = true;
-            this.openStudioDirectory.Location = new System.Drawing.Point(181, 202);
+            this.openStudioDirectory.Location = new System.Drawing.Point(181, 186);
             this.openStudioDirectory.Margin = new System.Windows.Forms.Padding(2);
             this.openStudioDirectory.Name = "openStudioDirectory";
-            this.openStudioDirectory.Size = new System.Drawing.Size(152, 17);
+            this.openStudioDirectory.Size = new System.Drawing.Size(144, 16);
             this.openStudioDirectory.TabIndex = 14;
-            this.openStudioDirectory.Text = "Just Open Studio Directory";
+            this.openStudioDirectory.Text = "只打开 Studio 文件夹";
             this.openStudioDirectory.UseVisualStyleBackColor = true;
             // 
             // targetVersionLabel
@@ -161,21 +164,21 @@
             this.targetVersionLabel.CausesValidation = false;
             this.targetVersionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.targetVersionLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.targetVersionLabel.Location = new System.Drawing.Point(178, 137);
+            this.targetVersionLabel.Location = new System.Drawing.Point(178, 126);
             this.targetVersionLabel.Name = "targetVersionLabel";
-            this.targetVersionLabel.Size = new System.Drawing.Size(79, 13);
+            this.targetVersionLabel.Size = new System.Drawing.Size(91, 13);
             this.targetVersionLabel.TabIndex = 17;
-            this.targetVersionLabel.Text = "Target Version:";
+            this.targetVersionLabel.Text = "目标分支版本：";
             // 
             // title
             // 
             this.title.AutoSize = true;
             this.title.Font = new System.Drawing.Font("Lucida Console", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.title.Location = new System.Drawing.Point(116, 28);
+            this.title.Location = new System.Drawing.Point(116, 26);
             this.title.Name = "title";
             this.title.Size = new System.Drawing.Size(205, 48);
             this.title.TabIndex = 20;
-            this.title.Text = "Roblox Studio\r\nMod Manager";
+            this.title.Text = "Roblox Studio\r\n模组管理器";
             // 
             // targetVersion
             // 
@@ -183,19 +186,58 @@
             this.targetVersion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.targetVersion.FormattingEnabled = true;
             this.targetVersion.Items.AddRange(new object[] {
-            "(Use Latest)"});
-            this.targetVersion.Location = new System.Drawing.Point(181, 153);
+            "（使用最新版）"});
+            this.targetVersion.Location = new System.Drawing.Point(181, 141);
             this.targetVersion.Name = "targetVersion";
-            this.targetVersion.Size = new System.Drawing.Size(152, 21);
+            this.targetVersion.Size = new System.Drawing.Size(152, 20);
             this.targetVersion.TabIndex = 18;
             this.targetVersion.SelectedIndexChanged += new System.EventHandler(this.targetVersion_SelectedIndexChanged);
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(21, 199);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(137, 12);
+            this.linkLabel1.TabIndex = 22;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "作者：CloneTrooper1019";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // linkLabel2
+            // 
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.Location = new System.Drawing.Point(21, 216);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(89, 12);
+            this.linkLabel2.TabIndex = 23;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Text = "翻译：SteveXMH";
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            // 
+            // quietStartWhenHavingArgs
+            // 
+            this.quietStartWhenHavingArgs.AccessibleName = "携带参数时直接启动";
+            this.quietStartWhenHavingArgs.AutoSize = true;
+            this.quietStartWhenHavingArgs.Checked = true;
+            this.quietStartWhenHavingArgs.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.quietStartWhenHavingArgs.Location = new System.Drawing.Point(182, 206);
+            this.quietStartWhenHavingArgs.Name = "quietStartWhenHavingArgs";
+            this.quietStartWhenHavingArgs.Size = new System.Drawing.Size(132, 16);
+            this.quietStartWhenHavingArgs.TabIndex = 24;
+            this.quietStartWhenHavingArgs.Text = "携带参数时直接启动";
+            this.quietStartWhenHavingArgs.UseVisualStyleBackColor = true;
+            this.quietStartWhenHavingArgs.CheckedChanged += new System.EventHandler(this.quietStartWhenHavingArgs_CheckedChanged);
+            // 
             // Launcher
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(354, 229);
+            this.ClientSize = new System.Drawing.Size(354, 237);
+            this.Controls.Add(this.quietStartWhenHavingArgs);
+            this.Controls.Add(this.linkLabel2);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.title);
             this.Controls.Add(this.logo);
             this.Controls.Add(this.targetVersion);
@@ -214,7 +256,7 @@
             this.MaximizeBox = false;
             this.Name = "Launcher";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Roblox Studio Mod Manager";
+            this.Text = "Roblox Studio 模组管理器";
             this.Load += new System.EventHandler(this.Launcher_Load);
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             this.ResumeLayout(false);
@@ -236,6 +278,8 @@
         private System.Windows.Forms.Label targetVersionLabel;
         private System.Windows.Forms.Label title;
         private System.Windows.Forms.ComboBox targetVersion;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.CheckBox quietStartWhenHavingArgs;
     }
 }
-

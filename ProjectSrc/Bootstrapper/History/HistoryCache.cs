@@ -39,9 +39,15 @@ namespace RobloxStudioModManager
                     if (timeDiff.TotalMinutes > 5)
                     {
                         string historyEndpoint = $"https://s3.amazonaws.com/setup.{branch}.com/DeployHistory.txt";
-
-                        using (WebClient http = new WebClient())
-                            cache.History = http.DownloadString(historyEndpoint);
+                        try
+                        {
+                            using (WebClient http = new WebClient())
+                                cache.History = http.DownloadString(historyEndpoint);
+                        }
+                        catch (WebException e)
+                        {
+                            cache.History = "";
+                        }
 
                         cache.LastUpdate = DateTime.Now;
                     }

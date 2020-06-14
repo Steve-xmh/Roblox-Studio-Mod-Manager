@@ -213,7 +213,7 @@ namespace RobloxStudioModManager
                                 
                                 if (!fileManifest.ContainsValue(sig))
                                 {
-                                    echo($"Deleting unused file {fileName}");
+                                    echo($"检测到无用文件 {fileName}");
                                     fileRegistry.DeleteValue(fileName);
                                     File.Delete(filePath);
                                 }
@@ -260,7 +260,7 @@ namespace RobloxStudioModManager
 
                 if (running.Count > 0)
                 {
-                    setStatus("Shutting down Roblox Studio...");
+                    setStatus("正在关闭 Roblox Studio...");
 
                     TopMost = false;
                     Hide();
@@ -309,11 +309,11 @@ namespace RobloxStudioModManager
 
                         DialogResult result = MessageBox.Show
                         (
-                            "All Roblox Studio processes need to be closed in order to update Roblox Studio!\n" +
-                            "Press Ok once you've saved your work, or\n" +
-                            "Press Cancel to skip this update temporarily.",
+                            "检测到 Roblox Studio 进程正在运行！请关闭所有存在的 Roblox Studio 进程后继续更新！\n" +
+                            "点击是将关闭所有存在的 Roblox Studio 进程并开始更新，\n" +
+                            "点击否将临时跳过更新并继续。",
 
-                            "Notice",
+                            "注意",
                             MessageBoxButtons.OKCancel,
                             MessageBoxIcon.Warning
                         );
@@ -342,11 +342,11 @@ namespace RobloxStudioModManager
             {
                 DialogResult check = MessageBox.Show
                 (
-                    "Roblox Studio is out of date!\n"
+                    "Roblox Studio 不是最新版本！\n"
                     + updateReason +
-                    "\nWould you like to update now?",
+                    "\n是否需要更新 Roblox Studio？",
 
-                    "Out of date!",
+                    "需要更新",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Warning
                 );
@@ -510,7 +510,7 @@ namespace RobloxStudioModManager
             if (oldSig == newSig && !forceInstall)
             {
                 int fileCount = pkgInfo.GetInt("NumFiles");
-                echo($"Package '{pkgName}' hasn't changed between builds, skipping.");
+                echo($"包 '{pkgName}' 并未在更新中被更改，已跳过...");
 
                 incrementProgressBarMax(fileCount);
                 incrementProgress(fileCount);
@@ -521,7 +521,7 @@ namespace RobloxStudioModManager
             string zipFileUrl = $"https://s3.amazonaws.com/setup.{branch}.com/{buildVersion}-{pkgName}";
             string zipExtractPath = Path.Combine(downloads, package.Name);
 
-            echo($"Installing package {zipFileUrl}");
+            echo($"正在安装包 {zipFileUrl}");
 
             var localHttp = new WebClient();
             localHttp.Headers.Set("UserAgent", "Roblox");
@@ -688,14 +688,14 @@ namespace RobloxStudioModManager
                 if (File.Exists(extractPath))
                     File.Delete(extractPath);
 
-                echo($"Writing {filePath}...");
+                echo($"正在写入 {filePath}...");
                 entry.ExtractToFile(extractPath);
 
                 fileRegistry.SetValue(filePath, newFileSig);
             }
             catch
             {
-                echo($"FILE WRITE FAILED: {filePath} (This build may not run as expected!)");
+                echo($"文件写入失败： {filePath} （此构建可能将因此无法正常运行！）");
             }
 
             incrementProgress();
@@ -737,8 +737,8 @@ namespace RobloxStudioModManager
         {
             restore();
 
-            setStatus("Checking for updates");
-            echo("Checking build installation...");
+            setStatus("检查更新中");
+            echo("检查该构建版本是否可安装...");
 
             string currentBranch = Program.GetString("BuildBranch", "roblox");
             string currentVersion = versionRegistry.GetString("VersionGuid");
@@ -751,7 +751,7 @@ namespace RobloxStudioModManager
             if (shouldInstall || fastVersion != currentVersion)
             {
                 if (currentBranch != "roblox")
-                    echo("Possible update detected, verifying...");
+                    echo("发现已有更新，验证中...");
 
                 versionInfo = await GetCurrentVersionInfo(branch, fastVersion);
                 buildVersion = versionInfo.Guid;
@@ -763,7 +763,7 @@ namespace RobloxStudioModManager
 
             if (currentVersion != buildVersion || shouldInstall)
             {
-                echo("This build needs to be installed!");
+                echo("此构建版本需要安装！");
                 bool studioClosed = await shutdownStudioProcesses();
 
                 if (studioClosed)
@@ -773,15 +773,15 @@ namespace RobloxStudioModManager
                     string versionId = versionInfo.Version;
 
                     restore();
-                    setStatus($"Installing Version {versionId} of Roblox Studio...");
+                    setStatus($"正在安装版本为 {versionId} 的 Roblox Studio...");
 
                     var taskQueue = new List<Task>();
                     writtenFiles = new HashSet<string>();
 
-                    echo("Grabbing package manifest...");
+                    echo("正在获取版本元信息...");
                     var pkgManifest = await PackageManifest.Get(branch, buildVersion);
 
-                    echo("Grabbing file manifest...");
+                    echo("正在获取文件元信息...");
                     fileManifest = await FileManifest.Get(branch, buildVersion);
 
                     progressBar.Maximum = 5000;
@@ -797,12 +797,12 @@ namespace RobloxStudioModManager
                     }
 
                     await Task.WhenAll(taskQueue);
-                    echo("Writing AppSettings.xml...");
+                    echo("正在写入 AppSettings.xml...");
 
                     string appSettings = Path.Combine(studioDir, "AppSettings.xml");
                     File.WriteAllText(appSettings, appSettingsXml);
 
-                    setStatus("Deleting unused files...");
+                    setStatus("正在搜索未使用的文件...");
                     await deleteUnusedFiles();
 
                     progressBar.Style = ProgressBarStyle.Marquee;
@@ -818,30 +818,30 @@ namespace RobloxStudioModManager
                     progressBar.Style = ProgressBarStyle.Marquee;
                     progressBar.Refresh();
 
-                    echo("Update cancelled. Launching on current branch and version.");
+                    echo("更新已取消，正在启动当前已有分支版本...");
                 }
             }
             else
             {
-                echo("This version of Roblox Studio has been installed!");
+                echo("该版本安装成功！");
             }
             
-            setStatus("Configuring Roblox Studio...");
+            setStatus("正在配置 Roblox Studio...");
 
-            echo("Updating registry protocols...");
+            echo("正在更新注册表...");
             Program.UpdateStudioRegistryProtocols();
 
             if (exitWhenClosed)
             {
-                echo("Applying flag configuration...");
+                echo("应用参数配置中...");
                 FlagEditor.ApplyFlags();
 
-                echo("Patching explorer icons...");
+                echo("修改浏览窗口图标中...");
                 await ClassIconEditor.PatchExplorerIcons();
             }
             
-            setStatus("Starting Roblox Studio...");
-            echo("Roblox Studio is up to date!");
+            setStatus("正在启动 Roblox Studio...");
+            echo("Roblox Studio 已为最新版！");
 
             if (setStartEvent)
             {
@@ -880,10 +880,10 @@ namespace RobloxStudioModManager
             (
                 this,
 
-                "The installation has not finished yet!\n" +
-                "Are you sure you want to close this window?",
+                "安装尚未完成！\n" +
+                "确认要关闭此窗口吗？",
 
-                "Warning",
+                "警告",
 
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning

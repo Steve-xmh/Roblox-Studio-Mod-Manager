@@ -22,8 +22,8 @@ namespace RobloxStudioModManager
         private DataTable overrideTable;
         private Dictionary<string, DataRow> overrideRowLookup = new Dictionary<string, DataRow>();
 
-        private const string OVERRIDE_STATUS_OFF = "No local overrides were found on load.";
-        private const string OVERRIDE_STATUS_ON = "Values highlighted in red were overridden locally.";
+        private const string OVERRIDE_STATUS_OFF = "未找到任何已覆盖参数";
+        private const string OVERRIDE_STATUS_ON = "标为红字的参数为本地已被修改的参数";
 
         private List<FVariable> flags;
         private List<FVariable> allFlags;
@@ -375,7 +375,7 @@ namespace RobloxStudioModManager
 
         private void removeAll_Click(object sender, EventArgs e)
         {
-            bool doRemove = confirm("Confirmation", "Are you sure you would like to remove all flag overrides?");
+            bool doRemove = confirm("确认", "是否确认重置所有参数更改？");
 
             if (doRemove)
             {

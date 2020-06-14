@@ -402,7 +402,7 @@ namespace RobloxStudioModManager
             enableIconOverride.Checked = enabled;
             restoreOriginal.Enabled = enabled;
 
-            editIcon.Text = "Edit Icon " + index;
+            editIcon.Text = "编辑图标 " + index;
         }
         
         private void enableIconOverride_CheckedChanged(object sender, EventArgs e)
@@ -498,7 +498,7 @@ namespace RobloxStudioModManager
             darkTheme = explorerRegistry.GetBool("DarkTheme");
 
             showModified.Checked = showModifiedIcons;
-            themeSwitcher.Text = "Theme: " + (darkTheme ? "Dark" : "Light");
+            themeSwitcher.Text = "主题：" + (darkTheme ? "黑暗" : "默认");
 
             selectedIcon.BackColor = (darkTheme ? THEME_DARK_NORMAL : THEME_LIGHT_NORMAL);
             selectedIcon.Refresh();
@@ -577,7 +577,7 @@ namespace RobloxStudioModManager
             ResumeLayout();
 
             itemSlots.Value = extraSlots;
-            header.Text = "Select Icon";
+            header.Text = "选择图标";
 
             iconWatcher = new FileSystemWatcher(getExplorerIconDir());
             iconWatcher.Filter = "*.png";
@@ -689,7 +689,7 @@ namespace RobloxStudioModManager
         {
             darkTheme = !darkTheme;
             explorerRegistry.SetValue("DarkTheme", darkTheme);
-            themeSwitcher.Text = "Theme: " + (darkTheme ? "Dark" : "Light");
+            themeSwitcher.Text = "主题：" + (darkTheme ? "黑暗" : "默认");
             
             Color color = darkTheme ? THEME_DARK_NORMAL : THEME_LIGHT_NORMAL;
             SuspendLayout();
@@ -705,11 +705,14 @@ namespace RobloxStudioModManager
         {
             DialogResult result = MessageBox.Show
             (
+                "还原图标将会清除你所修改过的图标，且无法恢复。\n" +
+                "是否确认继续？",
+                /*
                 "Restoring the original icon will reset the icon file\n" +
                 "you have created. This cannot be undone.\n" +
                 "Are you sure you would like to continue?",
-
-                "Warning",
+                */
+                "警告",
 
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning
@@ -730,10 +733,12 @@ namespace RobloxStudioModManager
                     {
                         MessageBox.Show
                         (
-                            "Could not restore the original file!\n" +
-                            "Check if you have the icon open in an editor.",
+                            "无法恢复图标！\n" +
+                            // "Could not restore the original file!\n" +
+                            "请确认图标是否正在被其他软件占用（例如绘图软件）。",
+                            // "Check if you have the icon open in an editor.",
 
-                            "Error",
+                            "错误",
 
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Error

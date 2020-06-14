@@ -35,13 +35,21 @@ namespace RobloxStudioModManager
 
         private void Launcher_Load(object sender, EventArgs e)
         {
-            if (args != null)
-                openStudioDirectory.Enabled = false;
+            quietStartWhenHavingArgs.Checked = Program.GetBool("QuietStartWhenHavingArgs");
 
+            if (args != null)
+            {
+                openStudioDirectory.Enabled = false;
+            }
+            
             string build = Program.GetString("BuildBranch");
             int buildIndex = branchSelect.Items.IndexOf(build);
 
             branchSelect.SelectedIndex = Math.Max(buildIndex, 0);
+            if (quietStartWhenHavingArgs.Checked && args != null)
+            {
+                launchStudio_Click();
+            }
         }
 
         public string getModPath()
@@ -88,7 +96,7 @@ namespace RobloxStudioModManager
         {
             var warningForm = new Form()
             {
-                Text = "WARNING: HERE BE DRAGONS",
+                Text = "危险操作警告！",
                 
                 Width = 425, Height = 250,
                 MaximizeBox = false, MinimizeBox = false,
@@ -110,7 +118,7 @@ namespace RobloxStudioModManager
             {
                 AutoSize = true,
                 Location = new Point(54, 145),
-                Text = "Do not show this warning again.",
+                Text = "不再显示本警告",
                 Font = new Font("Microsoft Sans Serif", 9.75f),
             };
 
@@ -128,10 +136,14 @@ namespace RobloxStudioModManager
                 AutoSize = true,
 
                 Font = new Font("Microsoft Sans Serif", 9.75f),
+                Text = "编辑参数可能会让你的 Roblox Studio 出现未知异常，且很有可能损坏你的游戏工程文件数据。\n\n" +
+                       "除非你只是希望尝试一些特殊的新功能，否则极不建议编辑这些参数。\n\n" +
+                       "是否确定继续？",
+                /*
                 Text = "Editing flags can make Roblox Studio unstable, and could potentially corrupt your places and game data.\n\n" +
                        "You should not edit them unless you are just experimenting with new features locally, and you know what you're doing.\n\n" +
                        "Are you sure you would like to continue?",
-
+                       */
                 Location = new Point(50, 14),
                 MaximumSize = new Size(350, 0),
             };
@@ -139,13 +151,13 @@ namespace RobloxStudioModManager
             var yes = new Button()
             {
                 Size = new Size(100, 23),
-                Text = "Yes",
+                Text = "是",
             };
 
             var no = new Button()
             {
                 Size = new Size(100, 23),
-                Text = "No",
+                Text = "否",
             };
 
             yes.Click += (sender, e) =>
@@ -207,7 +219,7 @@ namespace RobloxStudioModManager
                 ClientVersionInfo info = await StudioBootstrapper.GetCurrentVersionInfo(branch);
                 Hide();
 
-                await StudioBootstrapper.BringUpToDate(branch, info.Guid, "Some newer flags might be missing.");
+                await StudioBootstrapper.BringUpToDate(branch, info.Guid, "某些新参数可能无法在旧版本使用！");
 
                 FlagEditor editor = new FlagEditor(branch);
                 editor.ShowDialog();
@@ -229,7 +241,7 @@ namespace RobloxStudioModManager
             ClientVersionInfo info = await StudioBootstrapper.GetCurrentVersionInfo(branch);
 
             Hide();
-            await StudioBootstrapper.BringUpToDate(branch, info.Guid, "The class icons may have received an update.");
+            await StudioBootstrapper.BringUpToDate(branch, info.Guid, "对象图标可能已被更新。");
 
             var editor = new ClassIconEditor(branch);
             editor.ShowDialog();
@@ -374,7 +386,7 @@ namespace RobloxStudioModManager
 
             // Clear the current list of target items.
             targetVersion.Items.Clear();
-            targetVersion.Items.Add("(Use Latest)");
+            targetVersion.Items.Add("（使用最新版）");
 
             // Populate the items list using the deploy history.
             Enabled = false;
@@ -425,6 +437,21 @@ namespace RobloxStudioModManager
 
             var target = targetVersion.SelectedItem as DeployLog;
             Program.SetValue("TargetVersion", target.VersionId);
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/Steve-xmh");
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/CloneTrooper1019");
+        }
+
+        private void quietStartWhenHavingArgs_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.SetValue("QuietStartWhenHavingArgs", quietStartWhenHavingArgs.Checked);
         }
     }
 }
